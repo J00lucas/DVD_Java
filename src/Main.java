@@ -5,7 +5,7 @@ import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-import java.util.Random;
+
 
 public class Main {
 
@@ -14,7 +14,6 @@ public class Main {
 
         janela.setTitle("DVD LOGO");
         janela.setSize(800, 600);
-        janela.setVisible(true);
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Painel painel = new Painel();
@@ -46,8 +45,8 @@ class Painel extends JPanel {
         x += velocidadeX;
         y += velocidadeY;
 
-        repaint();
         validarColisao();
+        repaint();
     }
 
     void validarColisao() {
@@ -69,15 +68,23 @@ class Painel extends JPanel {
                 (int)(Math.random()*255),
                 (int)(Math.random()*255)
         );
-
     }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.fillRect(x, y, largura, altura);
         g.setColor(cor);
-
+        g.fillRect(x, y, largura, altura);
     }
 
 }
+
+
+/*Graphics2D g2 = (Graphics2D) g;
+        Font fonte = new Font("Arial", Font.BOLD, 48);
+        g2.setFont(fonte);
+        g2.drawString("DVD", x, y);
+
+        Lembrar de add no paintCOmponent para colocar "DVD"
+
+        */
