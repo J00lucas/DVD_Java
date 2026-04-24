@@ -36,6 +36,7 @@ class Painel extends JPanel {
     Color cor = Color.RED;
 
     public Painel() {
+        setBackground(Color.BLACK);
         Timer timer = new Timer(16, event -> atualizar());
         timer.start();
     }
@@ -73,18 +74,22 @@ class Painel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.setColor(cor);
-        g.fillRect(x, y, largura, altura);
-    }
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON
+        );
 
-}
 
-
-/*Graphics2D g2 = (Graphics2D) g;
         Font fonte = new Font("Arial", Font.BOLD, 48);
+        g2.setColor(cor);
         g2.setFont(fonte);
-        g2.drawString("DVD", x, y);
 
-        Lembrar de add no paintCOmponent para colocar "DVD"
+        FontMetrics metrics = g2.getFontMetrics(fonte);
 
-        */
+        largura = metrics.stringWidth("DVD");
+        altura = metrics.getHeight();
+
+        g2.drawString("DVD", x, y + metrics.getAscent());
+    }
+}
